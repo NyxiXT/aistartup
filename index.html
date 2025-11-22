@@ -20,49 +20,39 @@
 
     /* ---------------------- BACKGROUND ---------------------- */
     body {
-      background: #020617;
-      color: white;
+      background: #ffffff;
+      color: rgb(255, 255, 255);
       position: relative;
       overflow-x: hidden;
+      background-image: url("images/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
-
-    /* Blurred, moving background image */
+    
     body::before {
       content: "";
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("images/background2.jpg");
-      filter: blur(6px) brightness(0.8) saturate(1.2);
-      opacity: 0.43;
-      animation: drift 38s infinite alternate ease-in-out;
+      width: 100%;
+      height: 100%;
       z-index: -1;
+      filter: blur(5px) brightness(0.8) saturate(1.2);
     }
 
-    @keyframes bgMove {
-      0% {
-        transform: scale(1.08) translateY(0px) translateX(0px);
-      }
-
-      100% {
-        transform: scale(1.12) translateY(-20px) translateX(20px);
-      }
-    }
-
-    /* Subtle neon overlay */
     body::after {
       content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center,
-          rgba(0, 255, 255, 0.05),
-          transparent 60%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
+      filter: blur(5px) brightness(0.8) saturate(1.2);
     }
 
-    /* ---------------------- HEADER ---------------------- */
+
     header {
       display: flex;
       justify-content: space-between;
@@ -380,6 +370,3 @@
 </body>
 
 </html>
-
-
-
