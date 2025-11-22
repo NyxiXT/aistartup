@@ -29,7 +29,7 @@
       background-position: center;
       background-attachment: fixed;
     }
-    
+
     body::before {
       content: "";
       position: absolute;
@@ -227,13 +227,80 @@
       opacity: 0.75;
     }
 
-    ::-webkit-scrollbar-corner {
+    /* ---------------------- SCROLLBAR STYLING ---------------------- */
+
+    :root {
+      --sb-width: 12px;
+      /* ширина скролбару */
+      --sb-track: rgba(10, 12, 18, 0.55);
+      /* фон треку */
+      --sb-thumb: rgba(79, 107, 255, 0.18);
+      /* нормальний тон thumb */
+      --sb-thumb-accent: rgba(143, 168, 255, 0.95);
+      /* акцент при наведенні */
+      --sb-thumb-border: rgba(255, 255, 255, 0.03);
+      /* тонка рамка */
+      --sb-glow: 0 8px 22px rgba(79, 107, 255, 0.12);
+    }
+
+    /* WebKit (Chrome, Edge, Safari) */
+    *::-webkit-scrollbar {
+      width: var(--sb-width);
+      height: var(--sb-width);
+    }
+
+    *::-webkit-scrollbar-track {
+      background: linear-gradient(180deg, rgba(5, 7, 20, 0.45), rgba(8, 10, 16, 0.45));
+      /* Якщо хочеш тонку текстуру з фонового зображення:
+     background: url("/mnt/data/background.jpg") center/cover;
+     opacity: 0.06; filter: blur(1px); (комбінуй з rgba, якщо потрібно)
+  */
+      border-radius: 12px;
+      margin: 8px 4px;
+      /* відступи щоб трек не "прилипав" */
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--sb-thumb), rgba(79, 107, 255, 0.22));
+      border-radius: 12px;
+      border: 2px solid var(--sb-thumb-border);
+      /* тонка рамка */
+      box-shadow: var(--sb-glow);
+    }
+
+    /* hover / active states */
+    *::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--sb-thumb-accent), rgba(79, 107, 255, 0.95));
+      transform: translateZ(0);
+      box-shadow: 0 10px 30px rgba(100, 130, 255, 0.22);
+    }
+
+    *::-webkit-scrollbar-thumb:active {
+      background: linear-gradient(180deg, rgba(143, 168, 255, 0.95), rgba(79, 107, 255, 0.95));
+      box-shadow: 0 6px 18px rgba(79, 107, 255, 0.28);
+    }
+
+    /* corner (де горизонтальний + вертикальний перетин) */
+    *::-webkit-scrollbar-corner {
       background: transparent;
     }
 
-    ::-webkit-scrollbar {
-      background: rgba(rgba(10, 0, 146, 0.527));
+    /* Firefox */
+    * {
+      scrollbar-width: none;
+      /* auto | thin | none */
+      scrollbar-color: rgba(58, 101, 255, 0.623) rgba(10, 12, 18, 0.55);
+      /* thumb track */
     }
+
+    /* Optional — для конкретного контейнера (наприклад .content) */
+    /*
+.content {
+  overflow: auto;
+}
+.content::-webkit-scrollbar { width: 10px; }
+.content::-webkit-scrollbar-thumb { background: rgba(143,168,255,0.9); border-radius: 8px; }
+*/
   </style>
 </head>
 
@@ -378,5 +445,3 @@
 </body>
 
 </html>
-
-
