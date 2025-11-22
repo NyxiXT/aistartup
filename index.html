@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Startup Landing</title>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ---------------------- GLOBAL RESET ---------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    /* ---------------------- BACKGROUND ---------------------- */
+    body {
+      background: #020617;
+      color: white;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Blurred, moving background image */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("/images/background2.jpg") center/cover no-repeat;
+      filter: blur(6px) brightness(0.8) saturate(1.2);
+      opacity: 0.43;
+      animation: drift 38s infinite alternate ease-in-out;
+      z-index: -1;
+    }
+
+    @keyframes bgMove {
+      0% {
+        transform: scale(1.08) translateY(0px) translateX(0px);
+      }
+
+      100% {
+        transform: scale(1.12) translateY(-20px) translateX(20px);
+      }
+    }
+
+    /* Subtle neon overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center,
+          rgba(0, 255, 255, 0.05),
+          transparent 60%);
+      z-index: -1;
+    }
+
+    /* ---------------------- HEADER ---------------------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 60px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    /* ---------------------- HERO ---------------------- */
+    .hero {
+      text-align: center;
+      margin-top: 80px;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-top: 15px;
+      opacity: 0.85;
+    }
+
+    /* ---------------------- BUTTONS ---------------------- */
+    button,
+    .btn {
+      background: #0ea5e9;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    button:hover,
+    .btn:hover {
+      background: #38bdf8;
+      transform: translateY(-2px);
+    }
+
+    /* ---------------------- FEATURE CARDS ---------------------- */
+    .features {
+      max-width: 1200px;
+      margin: 100px auto 40px;
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      padding: 0 40px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 28px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      transition: 0.35s;
+    }
+
+    /* Hover animation: lift + glow + scale */
+    .feature-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(0, 255, 255, 0.35);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.12);
+    }
+
+    /* Icon styling */
+    .feature-card .icon {
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    /* ---------------------- PROCESS SECTION ---------------------- */
+    .process {
+      max-width: 1200px;
+      margin: 120px auto;
+      padding: 0 40px;
+    }
+
+    .process h2 {
+      text-align: center;
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 60px;
+    }
+
+    .process-cards {
+      display: grid;
+      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .process-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 26px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      transition: 0.35s;
+    }
+
+    /* Same hover animation */
+    .process-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(0, 255, 255, 0.35);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.12);
+    }
+
+    /* ---------------------- CONTACT SALES ---------------------- */
+    .contact {
+      max-width: 900px;
+      margin: 130px auto;
+      text-align: center;
+      padding: 0 40px;
+    }
+
+    .contact h2 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .contact p {
+      font-size: 18px;
+      opacity: 0.8;
+      margin-bottom: 35px;
+    }
+
+    .contact form {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 130px;
+      resize: none;
+    }
+
+    /* ---------------------- FOOTER ---------------------- */
+    footer {
+      text-align: center;
+      padding: 40px;
+      margin-top: 80px;
+      opacity: 0.75;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">AI Startup</div>
+  </header>
+
+  <section class="hero">
+    <h1>Build AI products 10× faster</h1>
+    <p>Automated workflows, instant deployment, and intelligent integrations.</p>
+  </section>
+
+  <!-- =================== FEATURES =================== -->
+  <section class="features">
+
+    <div class="feature-card">
+      <div class="icon"><i data-lucide="cpu"></i></div>
+      <h3>Powerful AI Engine</h3>
+      <p>Next-gen inference with high-speed pipeline optimization.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon"><i data-lucide="bolt"></i></div>
+      <h3>Lightning Deploy</h3>
+      <p>Ship your apps with 1-click automated cloud deployment.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon"><i data-lucide="layers"></i></div>
+      <h3>Modular Tools</h3>
+      <p>Combine models, APIs, and scripts into one workflow.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon"><i data-lucide="shield"></i></div>
+      <h3>Security First</h3>
+      <p>Enterprise-grade encryption and audit-logging.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon"><i data-lucide="alarm-clock"></i></div>
+      <h3>Faster Work</h3>
+      <p>With AI, we make fast and high-quality products.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon"><i data-lucide="brain"></i></div>
+      <h3>Better Workers</h3>
+      <p>We do a difficult job, our employees are the best.</p>
+    </div>
+
+  </section>
+
+  <!-- =================== PROCESS =================== -->
+  <section class="process">
+    <h2>How It Works</h2>
+
+    <div class="process-cards">
+
+      <div class="process-card">
+        <div class="icon"><i data-lucide="file-code"></i></div>
+        <h3>1. Define Workflow</h3>
+        <p>Create custom pipelines using drag-and-drop blocks.</p>
+      </div>
+
+      <div class="process-card">
+        <div class="icon"><i data-lucide="git-branch"></i></div>
+        <h3>2. Integrate Models</h3>
+        <p>Connect GPT-like LLMs, embeddings, or custom models.</p>
+      </div>
+
+      <div class="process-card">
+        <div class="icon"><i data-lucide="server"></i></div>
+        <h3>3. Auto Deploy</h3>
+        <p>One-click deploy to global servers with instant scaling.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================== CONTACT SALES (RE-ADDED) =================== -->
+  <section id="contact" class="contact">
+    <h2>Contact Sales</h2>
+    <p>Tell us about your project, and we'll help you get started.</p>
+
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="fc1c56e8-55ba-4eba-8976-d1ea569e4715">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email@gmail.com" required>
+      <textarea name="message" required placeholder="Your text"></textarea>
+      <button type="submit">Submit Form</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 AI Startup — All Rights Reserved
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const form = document.getElementById('form');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      formData.append("access_key", "fc1c56e8-55ba-4eba-8976-d1ea569e4715");
+
+      const originalText = submitBtn.textContent;
+
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Success! Your message has been sent.");
+          form.reset();
+        } else {
+          alert("Error: " + data.message);
+        }
+
+      } catch (error) {
+        alert("Something went wrong. Please try again.");
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+
+</html>
